@@ -443,6 +443,8 @@
   </div>
   <script>
 
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString)
     // const search = location.search.substring(1).split(':')[0];
@@ -495,7 +497,7 @@
     }
 
     var ab_strings_a = "eq-leads";
-    if (ab_strings_a.includes(params.get('utm_source')) > 0) {
+    if (params.has('utm_source') && ab_strings_a.includes(params.get('utm_source')) > 0) {
       document.getElementById('ab_question_a').style.display = 'table-row';
     }
 
@@ -560,6 +562,7 @@
             }
           };
           console.log(payload);
+          alert(payload)
           let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
             method: 'POST',
             headers: {
@@ -617,7 +620,7 @@
     document.sdr_form.addEventListener('submit', async function (event) {
       event.preventDefault();
       let responses = document.sdr_form.elements;
-      // console.log('SDR Form Responses:', responses)
+      console.log('SDR Form Responses:', responses)
       let data = {};
       for (let i = 0; i < responses.length; i++) {
         if (
@@ -637,6 +640,7 @@
       try {
         await submitForm(data);
         document.getElementById('sdr_submit').disabled = true;
+        alert('Submitted')
       } catch (e) {
         //
       }
