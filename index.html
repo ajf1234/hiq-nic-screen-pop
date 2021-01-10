@@ -532,7 +532,7 @@
         });
     }
 
-    async function submitForm(form_data) {
+    function submitForm(form_data) {
       form_data.xfer_call_direction = 'Outbound';
       form_data.xfer_utm_source = params.get('utm_source');
       form_data.xfer_dial_campaign = params.get('campaign_name');
@@ -540,7 +540,7 @@
       form_data.xfer_lead_id = SALESFORCE_ID;
       form_data.xfer_opp_id = params.get('opportunity_id');
       form_data.xfer_sdr_id = params.get('agent_id');
-      form_data.xfer_sdr_fname = agent_name;
+      form_data.xfer_sdr_fname = params.get('agent_name');
       form_data.xfer_sdr_rand = Math.floor(Math.random() * 1000000) + 1;
       agentID = form_data.xfer_sdr_id;
       random6 = form_data.xfer_sdr_rand;
@@ -585,7 +585,7 @@
           console.log('submit form response id', response);
           document.getElementById('sdr_submit').innerHTML = "Posted(ID)";
           document.getElementById("AgentNameVal").innerHTML = "Waiting for an agent ...";
-          return new Promise(function (resolve, reject) {
+          return new Promise(function (resolve) {
             setTimeout(waitForAgent.bind(this, resolve), 5000);
           });
         }).catch(function (e) {
