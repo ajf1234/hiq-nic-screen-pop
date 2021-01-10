@@ -1,0 +1,663 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://media.healthiq.com/lib/flatpickr.min.css">
+  <script src="https://media.healthiq.com/lib/flatpickr.js"></script>
+  <style type="text/css">
+    *,
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      font-size: 14px;
+    }
+
+    .blk {
+      margin: 2px;
+      padding: 2px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #nextFollowupTime {
+      font-size: 14px;
+    }
+
+    #nextFollowupTimezone {
+      font-size: 14px;
+    }
+
+    body {
+      background-color: #E0E0E0;
+    }
+
+    table {
+      border-spacing: 10px;
+      padding: 0px;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    .label {
+      text-align: right;
+    }
+
+    .value {
+      font-weight: bold;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .big {
+      font-size: 200%;
+    }
+
+    .large {
+      font-size: 160%;
+    }
+
+    .medium {
+      font-size: 110%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .top {
+      vertical-align: text-top;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .bg-red {
+      background-color: red;
+    }
+
+    .pink {
+      color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <h1> OUTBOUND Life Lead </h1>
+  <h3 id="show_campaign_name"></h3>
+  <hr>
+  <div class="blk" style='padding: 0px 8px;'>
+    <table>
+      <tr>
+        <td style="width:15%"><b>Caller:</b></td>
+        <td style="width:35%">
+          <font size='+2'><b><span id="show_first_name"></span> <span id="show_last_name"></span></b></font>
+        </td>
+        <td style="width:15%"><b>Customer ID:</b></td>
+        <td id="show_customer_id"></td>
+      </tr>
+      <tr>
+        <td style="width:15%"><b>DOB:</b></td>
+        <td id="show_dob"></td>
+        <td style="width:15%"><b>Affinity:</b></td>
+        <td id="show_affinity"></td>
+      </tr>
+      <tr>
+        <td style="width:15%"><b>State:</b></td>
+        <td id="show_state"></td>
+        <td style="width:15%"></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <table>
+    <td>1. Complete questionaire</td>
+    <td>2. Write notes in MAX Disposition Notes</td>
+    <td>3. Copy & paste notes here for agent</td>
+    <td><b>4. Submit before starting transfer process</b></td>
+  </table>
+  <hr>
+  <div class="blk" style='padding: 0px 8px;'>
+    <table>
+      <tr>
+        <td style="width:15%"><b>Agent Joined Call:</b></td>
+        <td style="width:35%">
+          <font size='+2'><b>
+              <span id="AgentNameVal"></span>
+            </b></font>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <div class="blk">
+    <form name="sdr_form">
+      <table style="width:65%">
+        <tr>
+          <br>Hi, is this [<i>Mr./Ms.</i>] <span id="show_last_name2">[Customer Last Name]</span>
+          <br>Hi this is <span id="show_agent_name">[Your Name]</span> with Health IQ on a recorded line. I'm calling to
+          confirm a
+          few quick details
+          so we can get you the life insurance rates you requested <i>[short pause]</i>
+        </tr>
+        <tr>
+          <th style="width:25%">I have you located in <i><span id="show_state2"></span></i>, correct?</th>
+          <td style="width:25%">
+            <select name='xfer_state' placeholder='Select State' style="font-size:14px;" required>
+              <option value='AL'>AL</option>
+              <option value='AK'>AK</option>
+              <option value='AZ'>AZ</option>
+              <option value='AR'>AR</option>
+              <option value='CA'>CA</option>
+              <option value='CO'>CO</option>
+              <option value='CT'>CT</option>
+              <option value='DC'>DC</option>
+              <option value='DE'>DE</option>
+              <option value='FL'>FL</option>
+              <option value='GA'>GA</option>
+              <option value='HI'>HI</option>
+              <option value='ID'>ID</option>
+              <option value='IL'>IL</option>
+              <option value='IN'>IN</option>
+              <option value='IA'>IA</option>
+              <option value='KS'>KS</option>
+              <option value='KY'>KY</option>
+              <option value='LA'>LA</option>
+              <option value='ME'>ME</option>
+              <option value='MD'>MD</option>
+              <option value='MA'>MA</option>
+              <option value='MI'>MI</option>
+              <option value='MN'>MN</option>
+              <option value='MS'>MS</option>
+              <option value='MO'>MO</option>
+              <option value='MT'>MT</option>
+              <option value='NE'>NE</option>
+              <option value='NV'>NV</option>
+              <option value='NH'>NH</option>
+              <option value='NJ'>NJ</option>
+              <option value='NM'>NM</option>
+              <option value='NY'>NY</option>
+              <option value='NC'>NC</option>
+              <option value='ND'>ND</option>
+              <option value='OH'>OH</option>
+              <option value='OK'>OK</option>
+              <option value='OR'>OR</option>
+              <option value='PA'>PA</option>
+              <option value='RI'>RI</option>
+              <option value='SC'>SC</option>
+              <option value='SD'>SD</option>
+              <option value='TN'>TN</option>
+              <option value='TX'>TX</option>
+              <option value='UT'>UT</option>
+              <option value='VT'>VT</option>
+              <option value='VA'>VA</option>
+              <option value='WA'>WA</option>
+              <option value='WV'>WV</option>
+              <option value='WI'>WI</option>
+              <option value='WY'>WY</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th style='padding-left: 2vh;'><i>If they live in NY state:</i></th>
+          <td>
+            New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime.
+            But, if you do, we won't be able to contact you about the life insurance you're interested in.<br>
+            <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
+          </td>
+        </tr>
+        <tr>
+          <th>Do you know how much coverage you're looking for?</th>
+          <td>
+            <select name='xfer_coverage' style="font-size:14px;" required>
+              <option value='Unknown'>Unknown</option>
+              <option value='5k'> 5k</option>
+              <option value='10k'> 10k</option>
+              <option value='15k'> 15k</option>
+              <option value='20k'> 20k</option>
+              <option value='25k'> 25k</option>
+              <option value='100k'>100k</option>
+              <option value='200k'>200k</option>
+              <option value='300k'>300k</option>
+              <option value='400k'>400k</option>
+              <option value='500k'>500k</option>
+              <option value='600k'>600k</option>
+              <option value='700k'>700k</option>
+              <option value='800k'>800k</option>
+              <option value='900k'>900k</option>
+              <option value='1M'> 1M</option>
+              <option value='1M+'> 1M+</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Do you have an existing policy?</th>
+          <td><input name='xfer_existing_policy' style="font-size:14px;" type='radio'
+              value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_existing_policy' type='radio'
+              value='No'>&nbsp;No</td>
+        </tr>
+        <tr id='xfer_existing_policy_goal'>
+          <th style='padding-left: 2vh;'><i>If yes:</i>Are you looking to add to or replace that policy?</th>
+          <td><input name='xfer_existing_policy_intent' style="font-size:14px;" type='radio' value='Add'>&nbsp;Add
+            to&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name='xfer_existing_policy_intent' type='radio' value='Replace'>&nbsp;Replace&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name='xfer_existing_policy_intent' type='radio' value='N/A' checked>&nbsp;N/A
+          </td>
+        </tr>
+        <tr>
+          <th>What is your individual annual income before taxes? <i>[not household income]</i></th>
+          <td>
+            <select name='xfer_income' style="font-size:14px;" required>
+              <option value='0'>0</option>
+              <option value='5k'>5k</option>
+              <option value='10k'>10k</option>
+              <option value='15k'>15k</option>
+              <option value='20k'>20k</option>
+              <option value='25k'>25k</option>
+              <option value='30k'>30k</option>
+              <option value='35k'>35k</option>
+              <option value='40k'>40k</option>
+              <option value='45k'>45k</option>
+              <option value='50k'>50k</option>
+              <option value='55k'>55k</option>
+              <option value='60k'>60k</option>
+              <option value='65k'>65k</option>
+              <option value='70k'>70k</option>
+              <option value='75k'>75k</option>
+              <option value='80k'>80k</option>
+              <option value='85k'>85k</option>
+              <option value='90k'>90k</option>
+              <option value='95k'>95k</option>
+              <option value='100k'>100k</option>
+              <option value='105k'>105k</option>
+              <option value='110k'>110k</option>
+              <option value='115k'>115k</option>
+              <option value='120k'>120k</option>
+              <option value='125k'>125k</option>
+              <option value='130k'>130k</option>
+              <option value='135k'>135k</option>
+              <option value='140k'>140k</option>
+              <option value='145k'>145k</option>
+              <option value='150k'>150k</option>
+              <option value='155k'>155k</option>
+              <option value='160k'>160k</option>
+              <option value='165k'>165k</option>
+              <option value='170k'>170k</option>
+              <option value='175k'>175k</option>
+              <option value='180k'>180k</option>
+              <option value='185k'>185k</option>
+              <option value='190k'>190k</option>
+              <option value='195k'>195k</option>
+              <option value='200k'>200k</option>
+              <option value='205k'>205k</option>
+              <option value='210k'>210k</option>
+              <option value='215k'>215k</option>
+              <option value='220k'>220k</option>
+              <option value='225k'>225k</option>
+              <option value='230k'>230k</option>
+              <option value='235k'>235k</option>
+              <option value='240k'>240k</option>
+              <option value='245k'>245k</option>
+              <option value='250k+'>250k+</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Can you please confirm your date of birth?</th>
+          <td><input name='xfer_dob' style="font-size:14px;" placeholder='mm/dd/yyyy' type='text' autocomplete='off'
+              required></td>
+        </tr>
+        <tr>
+          <th>Have you ever applied for or received Social Security Disability?</th>
+          <td><input name='xfer_has_ssd' style="font-size:14px;" type='radio'
+              value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_has_ssd' type='radio' value='No'>&nbsp;No
+          </td>
+        </tr>
+        <tr>
+          <th>Do you have an active credit card or Direct Express Card?</th>
+          <td><input name='xfer_has_cc' style="font-size:14px;" type='radio'
+              value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_has_cc' type='radio' value='No'>&nbsp;No
+          </td>
+        </tr>
+        <tr>
+          <th>Who are you looking to protect? (Who will be your beneficiary? e.g., Mother, wife, kids, etc.)</th>
+          <td><textarea name='xfer_beneficiary' style='width: 100%; height: 25px;' maxlength='255'></textarea></td>
+        </tr>
+        <tr>
+          <th>What is your height and weight?</th>
+          <td style="font-size:14px; vertical-align: middle">
+            <select name='xfer_height_ft' style="font-size:14px; vertical-align: middle" required>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+            </select> ft
+            <select name='xfer_height_in' style="font-size:14px; vertical-align: middle" required>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+              <option value='8'>8</option>
+              <option value='9'>9</option>
+              <option value='10'>10</option>
+              <option value='11'>11</option>
+            </select> in
+            <textarea name='xfer_weight' style='width: 10%; height: 20px; vertical-align: middle'
+              maxlength='3'></textarea> lbs
+          </td>
+        </tr>
+        <tr>
+          <th>Have you ever had Cancer, Heart Disease, Stroke or Diabetes?</th>
+          <td>
+            <input name='xfer_everhad_illness' style="font-size:14px; vertical-align: middle" type='radio'
+              value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_everhad_illness' type='radio'
+              value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;
+            <textarea name='xfer_illness_notes' style='width: 10%; height: 20px; vertical-align: middle'
+              maxlength='255'></textarea> notes on illness
+          </td>
+        </tr>
+        <tr id="ab_question_a" style="display: none">
+          <th>If we find you a policy that fits your needs, are you comfortable scheduling your medical exam today?</th>
+          <td><input name='xfer_comfy_exam' style="font-size:14px;" type='radio'
+              value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name='xfer_comfy_exam' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+        </tr>
+        <tr id='xfer_lowcostxfer'>
+          <th style='padding-left: 2vh;'><i>Is this a low cost Xfer?</i></th>
+          <td>
+            <input name='xfer_lowcostxfer' type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name='xfer_lowcostxfer' type='radio' value='No' checked>&nbsp;No
+          </td>
+        </tr>
+        <tr>
+          <th>Notes:</th>
+          <td><textarea name='xfer_notes' style='width: 100%; height: 100px;' maxlength='255'
+              placeholder='Paste notes...' autocomplete='off'></textarea></td>
+        </tr>
+
+        <tr>
+          <th>Set next followup time?</th>
+          <td>
+            <input onchange="showNextFollowupTime();" name='set_next_followup_time' id='set_next_followup_time_yes'
+              style="font-size:14px;" type='radio' value='Yes'>
+            <label for="set_next_followup_time_yes">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label>
+            <input onchange="hideNextFollowupTime();" name='set_next_followup_time' id='set_next_followup_time_no'
+              type='radio' value='No'>
+            <label for="set_next_followup_time_no">&nbsp;No&nbsp;&nbsp;&nbsp;</label>
+          </td>
+        </tr>
+        <tr class="nextFollowupTimeBlock hidden">
+          <th>Next Followup Time:</th>
+          <td><input readonly="readonly" type="text" placeholder="Select Date and Time"
+              class="flatpickr flatpickr-input" id="nextFollowupTime" name="next_followup_time"></td>
+        </tr>
+        <tr class="nextFollowupTimeBlock hidden">
+          <th>Next Followup Timezone:</th>
+          <td>
+            <select name="next_followup_timezone" id="nextFollowupTimezone">
+              <option value="US/Alaska">US/Alaska</option>
+              <option value="US/Central">US/Central</option>
+              <option value="US/Eastern">US/Eastern</option>
+              <option value="US/Hawaii">US/Hawaii</option>
+              <option value="US/Mountain">US/Mountain</option>
+              <option value="US/Pacific" selected>US/Pacific</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td>
+            <button id="sdr_submit"
+              style="font-size:16px; padding: 10px 24px; border: 1px solid black; border-radius: 12px">
+              <b>SUBMIT</b>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>Then COLD Conference using Speed Dials</b>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <script>
+
+    const search = location.search.substring(1);
+    const params = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) })
+    // Expected Params:
+    // state
+    // utm_source
+    // campaign_name
+    // phone
+    // salesforce_id
+    // opportunity_id
+    // agent_id
+    // agent_name
+    // first_name
+    // last_name
+    // customer_id
+    // dob
+    // affinity
+    const showFields = [
+      'campaign_name',
+      'first_name',
+      'last_name',
+      'customer_id',
+      'dob',
+      'affinity',
+      'state',
+      'last_name2',
+      'agent_name',
+      'state2'
+    ]
+    const showFieldsCount = showFields.length
+    for (let i = 0; i < showFieldsCount; i++) {
+      // Trim digits, prefix show_, populate matching id
+      document.getElementById('show_' + showFields[i]).innerText = params[showFields[i].replace(/[0-9]/g, '')] || ''
+    }
+
+    let NUMBER1 = params.phone;
+    let SALESFORCE_ID = params.salesforce_id;
+    let agentID = "None";
+    let random6 = "None";
+    const auth = 'ZXB0eVh3SjI5RG5mRXJPRENGWEpVemtiOlM5czQ1cjJ1RDVSem9RNmRzcjJmVHpSVw==';
+    const hsvcBaseUrl = 'https://five9.external.healthiq.com/dialer';
+
+    //    NUMBER1 = "6194198707";
+    //    SALESFORCE_ID = "tid6194198707";
+
+    // Pre-populate state select
+    document.getElementsByName('xfer_state')[0].value = params.state;
+
+    var ab_strings_a = "eq-leads";
+    if (ab_strings_a.includes(params.utm_source) > 0) {
+      document.getElementById('ab_question_a').style.display = 'table-row';
+    }
+
+    function waitForAgent(resolve) {
+      console.log('Searching for agent');
+      fetch(hsvcBaseUrl + '/api/v1/contact_data/' + NUMBER1 + agentID + random6 + '?tag=AGENT_DATA', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${auth}`
+        }
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((call_data) => {
+          if (!call_data.Result) {
+            let xfer = call_data.agent_notes === undefined ? call_data : call_data.agent_notes;
+            console.log('Got', xfer);
+            if (xfer.xfer_agent_fname === undefined) {
+              console.log('Checking for xfer agent fname:');
+              setTimeout(waitForAgent.bind(this, resolve), 2000);
+            }
+            else {
+              document.getElementById("AgentNameVal").innerHTML = xfer.xfer_agent_fname;
+              resolve();
+            }
+          }
+          else {
+            console.log('Response 4 getting xfer agent fname:');
+            throw call_data.Result;
+          }
+        })
+        .catch((e) => {
+          console.error('Error getting xfer agent fname:', e);
+          setTimeout(waitForAgent.bind(this, resolve), 2000);
+        });
+    }
+
+    function submitForm(form_data) {
+      form_data.xfer_call_direction = 'Outbound';
+      form_data.xfer_utm_source = params.utm_source;
+      form_data.xfer_dial_campaign = params.campaign_name;
+      form_data.xfer_number1 = NUMBER1;
+      form_data.xfer_lead_id = SALESFORCE_ID;
+      form_data.xfer_opp_id = params.opportunity_id;
+      form_data.xfer_sdr_id = params.agent_id;
+      form_data.xfer_sdr_fname = agent_name;
+      form_data.xfer_sdr_rand = Math.floor(Math.random() * 1000000) + 1;
+      agentID = form_data.xfer_sdr_id;
+      random6 = form_data.xfer_sdr_rand;
+
+      document.getElementById('sdr_submit').innerHTML = "Writing by ANI ...";
+      console.log('Submitting Form by number1:', form_data);
+      new Promise(async function (resolve, reject) {
+        try {
+          let payload = {
+            contact_id: NUMBER1,
+            tag: 'CONTACT_DATA',
+            data: {
+              isq_notes: form_data
+            }
+          };
+          console.log(payload);
+          let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${auth}`
+            },
+            body: JSON.stringify(payload)
+          });
+          console.log('submit form response', response);
+          document.getElementById('sdr_submit').innerHTML = "Posted(ANI)";
+          resolve();
+        } catch (e) {
+          console.error('Error submitting form:', e);
+          document.getElementById('sdr_submit').innerHTML = "Failed(ANI)";
+          reject(e);
+        }
+      });
+
+      document.getElementById('sdr_submit').innerHTML = "Writing by ID...";
+      console.log('Submitting Form by lead ID:', form_data);
+      new Promise(async function (resolve, reject) {
+        try {
+          let payload = {
+            contact_id: SALESFORCE_ID,
+            tag: 'CONTACT_DATA',
+            data: {
+              isq_notes: form_data
+            }
+          };
+          console.log(payload);
+          let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${auth}`
+            },
+            body: JSON.stringify(payload)
+          });
+          console.log('submit form response', response);
+          document.getElementById('sdr_submit').innerHTML = "Posted(ID)";
+          resolve();
+        } catch (e) {
+          console.error('Error submitting form:', e);
+          document.getElementById('sdr_submit').innerHTML = "Failed(ID)";
+          reject(e);
+        }
+      });
+
+      document.getElementById("AgentNameVal").innerHTML = "Waiting for an agent ...";
+      return new Promise(function (resolve, reject) {
+        setTimeout(waitForAgent.bind(this, resolve), 5000);
+      });
+    }
+
+    document.sdr_form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      let responses = document.sdr_form.elements;
+      // console.log('SDR Form Responses:', responses)
+      let data = {};
+      for (let i = 0; i < responses.length; i++) {
+        if (
+          (responses[i].type == 'select-one' && responses[i].value && responses[i].value != '')
+          || (responses[i].type == 'text' && responses[i].value && responses[i].value != '')
+          || (responses[i].type == 'radio' && responses[i].checked)
+          || (responses[i].type == 'textarea')
+          || (responses[i].type == 'checkbox' && responses[i].checked)
+        ) {
+          data[responses[i].name] = responses[i].value;
+        } else if (responses[i].type == 'date') {
+          let dateSplit = responses[i].value.split('-');
+          data[responses[i].name] = dateSplit[1] + '/' + dateSplit[2] + '/' + dateSplit[0];
+        }
+        responses[i].disabled = true;
+      }
+      try {
+        await submitForm(data);
+        document.getElementById('sdr_submit').disabled = true;
+      } catch (e) {
+        //
+      }
+    });
+
+    function showNextFollowupTime() {
+      blocks = document.getElementsByClassName('nextFollowupTimeBlock');
+      for (i = 0; i < blocks.length; i++) {
+        blocks[i].classList.remove('hidden');
+      }
+    }
+
+    function hideNextFollowupTime() {
+      blocks = document.getElementsByClassName('nextFollowupTimeBlock');
+      for (i = 0; i < blocks.length; i++) {
+        blocks[i].classList.add('hidden');
+      }
+    }
+
+    flatpickr('#nextFollowupTime', {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+    });
+
+  </script>
+</body>
+
+</html>
