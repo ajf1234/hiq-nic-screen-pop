@@ -443,8 +443,10 @@
   </div>
   <script>
 
-    const search = location.search.substring(1).split(':')[0];
-    const params = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) })
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString)
+    // const search = location.search.substring(1).split(':')[0];
+    // const params = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) })
     // Expected Params:
     // state
     // utm_source
@@ -474,11 +476,11 @@
     const showFieldsCount = showFields.length
     for (let i = 0; i < showFieldsCount; i++) {
       // Trim digits, prefix show_, populate matching id
-      document.getElementById('show_' + showFields[i]).innerText = params[showFields[i].replace(/[0-9]/g, '')] || ''
+      document.getElementById('show_' + showFields[i]).innerText = params.get(showFields[i].replace(/[0-9]/g, '')) || ''
     }
 
-    let NUMBER1 = params.phone;
-    let SALESFORCE_ID = params.salesforce_id;
+    let NUMBER1 = params.get('phone');
+    let SALESFORCE_ID = params.get('salesforce_id');
     let agentID = "None";
     let random6 = "None";
     const auth = 'ZXB0eVh3SjI5RG5mRXJPRENGWEpVemtiOlM5czQ1cjJ1RDVSem9RNmRzcjJmVHpSVw==';
@@ -488,12 +490,12 @@
     //    SALESFORCE_ID = "tid6194198707";
 
     // Pre-populate state select
-    if (params.state) {
-      document.getElementsByName('xfer_state')[0].value = params.state;
+    if (params.has('state')) {
+      document.getElementsByName('xfer_state')[0].value = params.get('state');
     }
 
     var ab_strings_a = "eq-leads";
-    if (ab_strings_a.includes(params.utm_source) > 0) {
+    if (ab_strings_a.includes(params.get('utm_source')) > 0) {
       document.getElementById('ab_question_a').style.display = 'table-row';
     }
 
@@ -535,12 +537,12 @@
 
     function submitForm(form_data) {
       form_data.xfer_call_direction = 'Outbound';
-      form_data.xfer_utm_source = params.utm_source;
-      form_data.xfer_dial_campaign = params.campaign_name;
+      form_data.xfer_utm_source = params.get('utm_source');
+      form_data.xfer_dial_campaign = params.get('campaign_name');
       form_data.xfer_number1 = NUMBER1;
       form_data.xfer_lead_id = SALESFORCE_ID;
-      form_data.xfer_opp_id = params.opportunity_id;
-      form_data.xfer_sdr_id = params.agent_id;
+      form_data.xfer_opp_id = params.get('opportunity_id');
+      form_data.xfer_sdr_id = params.get('agent_id');
       form_data.xfer_sdr_fname = agent_name;
       form_data.xfer_sdr_rand = Math.floor(Math.random() * 1000000) + 1;
       agentID = form_data.xfer_sdr_id;
