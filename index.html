@@ -159,7 +159,7 @@
           so we can get you the life insurance rates you requested <i>[short pause]</i>
         </tr>
         <tr>
-          <th style="width:25%">I have you located in <i><span id="show_state2"></span></i>, correct?</th>
+          <th style="width:25%">I have you located in <i><span id="show_state2">[state]</span></i>, correct?</th>
           <td style="width:25%">
             <select name='xfer_state' placeholder='Select State' style="font-size:14px;" required>
               <option value='AL'>AL</option>
@@ -488,7 +488,9 @@
     //    SALESFORCE_ID = "tid6194198707";
 
     // Pre-populate state select
-    document.getElementsByName('xfer_state')[0].value = params.state;
+    if (params.state) {
+      document.getElementsByName('xfer_state')[0].value = params.state;
+    }
 
     var ab_strings_a = "eq-leads";
     if (ab_strings_a.includes(params.utm_source) > 0) {
